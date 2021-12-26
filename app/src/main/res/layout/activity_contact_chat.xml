@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ContactChatActivity">
+
+    <include
+        android:id="@+id/contact_chat_bar_layout"
+        layout="@layout/app_bar_layout" />
+
+    <ScrollView
+        android:id="@+id/contact_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/edt_contact_message"
+        android:layout_below="@+id/contact_chat_bar_layout">
+
+        <TextView
+            android:id="@+id/txt_contact_chat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:inputType="textMultiLine"
+            android:padding="10dp"
+            android:textAllCaps="false"
+            android:textColor="@android:color/background_dark"
+            android:textSize="18sp"
+            tools:ignore="TextViewEdits" />
+    </ScrollView>
+
+    <EditText
+        android:id="@+id/edt_contact_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@+id/btn_contact_photo_send"
+        android:hint="@string/your_message"
+        android:padding="14dp" />
+
+        <ImageButton
+            android:id="@+id/btn_contact_photo_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:layout_toStartOf="@+id/btn_contact_message_send"
+            android:background="@drawable/ic_camera" />
+
+        <ImageButton
+            android:id="@+id/btn_contact_message_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_send" />
+
+</RelativeLayout>
