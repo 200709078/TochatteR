@@ -47,7 +47,7 @@ public class ContactChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contact_chat);
 
         selectUserName = getIntent().getExtras().get("selectUserName").toString();
-        Toast.makeText(this, selectUserName, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, selectUserName, Toast.LENGTH_LONG).show();
 
         FirebaseAuth myAuth = FirebaseAuth.getInstance();
         activeUserID = myAuth.getCurrentUser().getUid();
@@ -119,7 +119,12 @@ public class ContactChatActivity extends AppCompatActivity {
             String selectUser = (String) ((DataSnapshot) iterator.next()).getValue();
             String sendUser = (String) ((DataSnapshot) iterator.next()).getValue();
 
-            txtContactChat.append(sendUser + "->" + selectUser + "\n" + chatMessage + "\n" + chatDateTime + "\n\n");
+            if (activeUsername.equals(sendUser) || activeUsername.equals(selectUser)) {
+                if (selectUserName.equals(sendUser) || selectUserName.equals(selectUser)) {
+                    txtContactChat.append(sendUser + "->" + selectUser + "\n" + chatMessage + "\n" + chatDateTime + "\n\n");
+                }
+            }
+
             contactScrollView.fullScroll(ScrollView.FOCUS_DOWN);
         }
     }

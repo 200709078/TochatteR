@@ -9,6 +9,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Toolbar myToolbar = findViewById(R.id.inc_main_toolbar);
+        myToolbar.setSubtitleTextColor(Color.WHITE);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle("TochatteR");
 

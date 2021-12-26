@@ -16,7 +16,4 @@
     </style>
 
     <style name="AlertDialog" parent="Theme.AppCompat.Light.Dialog" />
-    <style name="ToolbarColoredBackArrow">
-        <item name="android:textColorSecondary">@color/white</item>
-    </style>
 </resources>

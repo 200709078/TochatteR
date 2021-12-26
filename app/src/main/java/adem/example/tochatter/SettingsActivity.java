@@ -3,6 +3,7 @@ package adem.example.tochatter;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,6 +38,11 @@ public class SettingsActivity extends AppCompatActivity {
         FirebaseAuth myAuth = FirebaseAuth.getInstance();
         activeUserID = myAuth.getCurrentUser().getUid();
         dataPath = FirebaseDatabase.getInstance().getReference();
+
+        Toolbar myToolbar = findViewById(R.id.settings_chat_bar_layout);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle("Settings");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Button btnProfileUpdate = findViewById(R.id.btn_profile_update);
         edtUserName = findViewById(R.id.edt_set_username);

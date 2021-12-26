@@ -4,13 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
     tools:context=".SettingsActivity">
+
+    <include
+        android:id="@+id/settings_chat_bar_layout"
+        layout="@layout/app_bar_layout" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_below="@+id/settings_chat_bar_layout"
+        android:padding="10dp"
+        >
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/cimg_set_profile_picture"
