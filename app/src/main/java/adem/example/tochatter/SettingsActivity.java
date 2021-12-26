@@ -27,7 +27,7 @@ public class SettingsActivity extends AppCompatActivity {
     private EditText edtUserName, edtUserStatus;
 
     private DatabaseReference dataPath;
-    private String activeUserID;
+    private String activeUserID, email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +86,7 @@ public class SettingsActivity extends AppCompatActivity {
     private void updateSettings() {
         String setUserName = edtUserName.getText().toString();
         String setUserStatus = edtUserStatus.getText().toString();
+        email=getIntent().getExtras().get("email").toString();
 
         if (TextUtils.isEmpty(setUserName)) {
             Toast.makeText(this, "Please write your name...!!!", Toast.LENGTH_LONG).show();
@@ -94,8 +95,10 @@ public class SettingsActivity extends AppCompatActivity {
         } else {
 
             HashMap<String, String> profileMap = new HashMap<>();
+            profileMap.put("mail_tb", email);
             profileMap.put("name_tb", setUserName);
             profileMap.put("status_tb", setUserStatus);
+            profileMap.put("uid_tb",activeUserID);
 
             dataPath.child("Users_tb").child(activeUserID).setValue(profileMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override

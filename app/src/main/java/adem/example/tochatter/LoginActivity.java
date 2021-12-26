@@ -69,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
                         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        mainIntent.putExtra("email",email);
                         startActivity(mainIntent);
                         finish();
                         Toast.makeText(LoginActivity.this, "Login successful...!!!", Toast.LENGTH_LONG).show();

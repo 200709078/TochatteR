@@ -13,7 +13,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ScrollView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public class ContactsFragment extends Fragment {
@@ -29,6 +33,8 @@ public class ContactsFragment extends Fragment {
     private final ArrayList<String> arrayContacts = new ArrayList<>();
 
     private DatabaseReference userPath;
+    private String activeUserID = FirebaseAuth.getInstance().getUid();
+    private String activeUsername;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,6 +45,9 @@ public class ContactsFragment extends Fragment {
         ListView lstView = userFragmentView.findViewById(R.id.contacts_list_view);
         arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_expandable_list_item_1, arrayContacts);
         lstView.setAdapter(arrayAdapter);
+
+        takeUserInfo();
+
 
         listContacts();
 
@@ -57,14 +66,17 @@ public class ContactsFragment extends Fragment {
     }
 
     private void listContacts() {
+
         userPath.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 Set<String> set = new HashSet<>();
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    set.add(snapshot.child("name_tb").getValue().toString());
+                    if(!snapshot.child("name_tb").getValue().toString().equals(activeUsername)) {
+                        set.add(snapshot.child("name_tb").getValue().toString());
+                    }
                 }
 
                 arrayContacts.clear();
@@ -74,6 +86,22 @@ public class ContactsFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
+    private void takeUserInfo() {
+        userPath.child(activeUserID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    activeUsername = dataSnapshot.child("name_tb").getValue().toString();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }
