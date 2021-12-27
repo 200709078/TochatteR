@@ -82,12 +82,9 @@ public class MainActivity extends AppCompatActivity {
 
                 if ((dataSnapshot.child("name_tb").exists())) {
                     String currentUserName = dataSnapshot.child("name_tb").getValue().toString().toUpperCase(Locale.ROOT);
-                    Toast.makeText(MainActivity.this, "WELCOME " + currentUserName, Toast.LENGTH_LONG).show();
                 } else {
-                    String email=getIntent().getExtras().get("email").toString();
                     Intent settings = new Intent(MainActivity.this, SettingsActivity.class);
                     settings.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    settings.putExtra("email",email);
                     startActivity(settings);
                     finish();
                 }

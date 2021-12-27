@@ -47,6 +47,7 @@ public class SettingsActivity extends AppCompatActivity {
         Button btnProfileUpdate = findViewById(R.id.btn_profile_update);
         edtUserName = findViewById(R.id.edt_set_username);
         edtUserStatus = findViewById(R.id.edt_set_status);
+        email=FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
         btnProfileUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +93,6 @@ public class SettingsActivity extends AppCompatActivity {
     private void updateSettings() {
         String setUserName = edtUserName.getText().toString();
         String setUserStatus = edtUserStatus.getText().toString();
-        email=getIntent().getExtras().get("email").toString();
 
         if (TextUtils.isEmpty(setUserName)) {
             Toast.makeText(this, "Please write your name...!!!", Toast.LENGTH_LONG).show();
