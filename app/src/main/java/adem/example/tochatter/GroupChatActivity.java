@@ -27,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Locale;
 
 public class GroupChatActivity extends AppCompatActivity {
 
@@ -134,7 +135,7 @@ public class GroupChatActivity extends AppCompatActivity {
         } else {
 
             Calendar datetimeCalendar = Calendar.getInstance();
-            SimpleDateFormat activeDateTimeFormat = new SimpleDateFormat("dd MMM yyyy hh:mm:ss");
+            SimpleDateFormat activeDateTimeFormat = new SimpleDateFormat("dd.MM.yy HH:mm:ss", Locale.ROOT);
             String activeDateTime = activeDateTimeFormat.format(datetimeCalendar.getTime());
 
             HashMap<String, Object> groupMessageKey = new HashMap<>();
