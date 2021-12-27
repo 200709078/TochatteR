@@ -26,8 +26,7 @@
             android:padding="10dp"
             android:textAllCaps="false"
             android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            tools:ignore="TextViewEdits" />
+            android:textSize="18sp"/>
     </ScrollView>
 
 
@@ -38,8 +37,8 @@
         android:layout_alignParentBottom="true"
         android:layout_toStartOf="@+id/btn_group_photo_send"
         android:hint="@string/your_message"
-        android:autofillHints="@string/your_message"
-        android:inputType="text" />
+        android:inputType="text"
+        android:padding="14dp"/>
 
     <ImageButton
         android:id="@+id/btn_group_photo_send"

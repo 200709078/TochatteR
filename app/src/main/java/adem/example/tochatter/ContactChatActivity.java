@@ -126,7 +126,7 @@ public class ContactChatActivity extends AppCompatActivity {
 
             if (activeUsername.equals(sendUser) || activeUsername.equals(selectUser)) {
                 if (selectUserName.equals(sendUser) || selectUserName.equals(selectUser)) {
-                    txtContactChat.append(sendUser + "->" + selectUser + "\n" + chatMessage + "\n" + chatDateTime + "\n\n");
+                    txtContactChat.append(sendUser + "->" + selectUser + "\n" + chatMessage + "\n" + chatDateTime + "\n\n\n\n");
                 }
             }
 
