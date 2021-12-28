@@ -119,7 +119,9 @@ public class GroupChatActivity extends AppCompatActivity {
             String chatDateTime = (String) ((DataSnapshot) iterator.next()).getValue();
             String chatMessage = (String) ((DataSnapshot) iterator.next()).getValue();
             String userName = (String) ((DataSnapshot) iterator.next()).getValue();
-            txtGroupChat.append(userName + " :\n" + chatMessage + "\n" + chatDateTime + "\n\n\n\n");
+            String s_UID = (String) ((DataSnapshot) iterator.next()).getValue();
+
+            txtGroupChat.append(userName + " :\n" + chatMessage + "\n" + chatDateTime + "\n\n");
 
             groupScrollView.fullScroll(ScrollView.FOCUS_DOWN);
         }
@@ -144,6 +146,7 @@ public class GroupChatActivity extends AppCompatActivity {
             DatabaseReference groupMessageKeyPath = groupNamePath.child(messageKey);
 
             HashMap<String, Object> messageValuesMap = new HashMap<>();
+            messageValuesMap.put("s_uid", activeUserID);
             messageValuesMap.put("name_tb", activeUsername);
             messageValuesMap.put("message_tb", message);
             messageValuesMap.put("date_time_tb", activeDateTime);

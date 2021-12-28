@@ -47,7 +47,7 @@ public class SettingsActivity extends AppCompatActivity {
         Button btnProfileUpdate = findViewById(R.id.btn_profile_update);
         edtUserName = findViewById(R.id.edt_set_username);
         edtUserStatus = findViewById(R.id.edt_set_status);
-        email=FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
         btnProfileUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,7 +104,7 @@ public class SettingsActivity extends AppCompatActivity {
             profileMap.put("mail_tb", email);
             profileMap.put("name_tb", setUserName);
             profileMap.put("status_tb", setUserStatus);
-            profileMap.put("uid_tb",activeUserID);
+            profileMap.put("uid_tb", activeUserID);
 
             dataPath.child("Users_tb").child(activeUserID).setValue(profileMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override

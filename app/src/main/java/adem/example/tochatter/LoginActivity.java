@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Login successful...!!!", Toast.LENGTH_LONG).show();
 
                     } else {
-                        String eMessage = task.getException().toString();
+                        String eMessage = task.getException().getMessage();
                         Toast.makeText(LoginActivity.this, "Error: " + eMessage + "\nCheck information...!!!", Toast.LENGTH_LONG).show();
                     }
                     btnLogin.setEnabled(true);

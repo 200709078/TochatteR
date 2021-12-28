@@ -97,10 +97,10 @@ public class RegisterActivity extends AppCompatActivity {
                         startActivity(mainIntent);
                         finish();
 
-                        Toast.makeText(RegisterActivity.this, "New account creation successful.\n WELCOME "+username+"...!!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "New account creation successful.\n WELCOME " + username + "...!!!", Toast.LENGTH_SHORT).show();
                     } else {
-                        String eMessage = task.getException().toString();
-                        Toast.makeText(RegisterActivity.this, "Error :" + eMessage + " Check your information...!!!", Toast.LENGTH_SHORT).show();
+                        String eMessage = task.getException().getMessage();
+                        Toast.makeText(RegisterActivity.this, "Error :" + eMessage + "\nCheck your information...!!!", Toast.LENGTH_SHORT).show();
                     }
                     btnCreateRegister.setEnabled(true);
                 }

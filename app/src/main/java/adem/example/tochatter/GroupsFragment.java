@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,10 +29,13 @@ public class GroupsFragment extends Fragment {
     private ArrayAdapter<String> arrayAdapter;
     private final ArrayList<String> arrayGroups = new ArrayList<>();
 
+    private String activeUserId = FirebaseAuth.getInstance().getUid();
+
     private DatabaseReference groupPath;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
 
         View groupFragmentView = inflater.inflate(R.layout.fragment_groups, container, false);
         groupPath = FirebaseDatabase.getInstance().getReference().child("Groups_tb");

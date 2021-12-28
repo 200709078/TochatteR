@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser activeUser;
     private FirebaseAuth myAuth;
     private DatabaseReference usersReference;
-    private String activeUserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void haveUsers() {
-        activeUserID = myAuth.getCurrentUser().getUid();
+        String activeUserID = myAuth.getCurrentUser().getUid();
 
         usersReference.child("Users_tb").child(activeUserID).addValueEventListener(new ValueEventListener() {
             @Override
@@ -155,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void createNewGroup(String groupName) {
-        usersReference.child("Groups_tb").child(groupName).setValue("").addOnCompleteListener(new OnCompleteListener<Void>() {
+        usersReference.child("Groups_tb").child(groupName).setValue(" ").addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {

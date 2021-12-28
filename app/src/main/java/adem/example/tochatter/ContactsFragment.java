@@ -74,7 +74,7 @@ public class ContactsFragment extends Fragment {
                 Set<String> set = new HashSet<>();
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    if(!snapshot.child("name_tb").getValue().toString().equals(activeUsername)) {
+                    if (!snapshot.child("name_tb").getValue().toString().equals(activeUsername)) {
                         set.add(snapshot.child("name_tb").getValue().toString());
                     }
                 }

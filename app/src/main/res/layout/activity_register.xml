@@ -13,9 +13,12 @@
 
         <ImageView
             android:id="@+id/img_register"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/register_photo" />
+            android:layout_width="280dp"
+            android:layout_height="280dp"
+            android:layout_gravity="center_horizontal"
+            android:fadingEdge="horizontal|vertical"
+            android:src="@drawable/register_photo"
+            android:layout_marginTop="10dp"/>
 
         <EditText
             android:id="@+id/edt_register_username"
@@ -23,7 +26,8 @@
             android:layout_height="wrap_content"
             android:hint="@string/enter_your_username"
             android:inputType="text"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"/>
 
         <EditText
             android:id="@+id/edt_register_email"
@@ -45,7 +49,7 @@
             android:id="@+id/edt_register_re_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/re_enter_your_password"
+            android:hint="@string/confirm_your_password"
             android:inputType="textPassword"
             android:textSize="20sp" />
 
