@@ -21,4 +21,6 @@
     <string name="take_photo">Take Photo</string>
     <string name="send_message">Send Message</string>
     <string name="confirm_your_password">Confirm your password</string>
+    <string name="enter_group_name_search">Enter group name for search</string>
+    <string name="enter_user_name_for_search">Enter user name for search</string>
 </resources>

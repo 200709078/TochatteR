@@ -71,7 +71,8 @@ public class LoginActivity extends AppCompatActivity {
                         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(mainIntent);
                         finish();
-                        Toast.makeText(LoginActivity.this, "Login successful...!!!", Toast.LENGTH_LONG).show();
+
+                        Toast.makeText(LoginActivity.this, "Login successful.\nWelcome "+email+"...!!!", Toast.LENGTH_LONG).show();
 
                     } else {
                         String eMessage = task.getException().getMessage();

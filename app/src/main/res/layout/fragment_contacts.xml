@@ -5,7 +5,31 @@
     android:layout_height="match_parent"
     tools:context=".ContactsFragment">
 
+    <LinearLayout
+        android:id="@+id/linear_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_search"/>
+
+        <EditText
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_group_name_search"
+            android:inputType="text" />
+
+    </LinearLayout>
+
+
     <ListView
+        android:layout_below="@id/linear_search"
         android:id="@+id/contacts_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

@@ -7,11 +7,13 @@
         <entry key="..\:/avmad/TochatteR/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1388888888888889" />
         <entry key="..\:/avmad/TochatteR/app/src/main/res/drawable/butonlar.xml" value="0.261025641025641" />
         <entry key="..\:/avmad/TochatteR/app/src/main/res/drawable/girdiler.xml" value="0.261025641025641" />
+        <entry key="..\:/avmad/TochatteR/app/src/main/res/drawable/ic_baseline_person_add_24.xml" value="0.26510416666666664" />
         <entry key="..\:/avmad/TochatteR/app/src/main/res/drawable/ic_busy.xml" value="0.26510416666666664" />
         <entry key="..\:/avmad/TochatteR/app/src/main/res/drawable/ic_camera.xml" value="0.26510416666666664" />
         <entry key="..\:/avmad/TochatteR/app/src/main/res/drawable/ic_email.xml" value="0.1388888888888889" />
         <entry key="..\:/avmad/TochatteR/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1388888888888889" />
         <entry key="..\:/avmad/TochatteR/app/src/main/res/drawable/ic_lock.xml" value="0.1388888888888889" />
+        <entry key="..\:/avmad/TochatteR/app/src/main/res/drawable/ic_person_add.xml" value="0.26510416666666664" />
         <entry key="..\:/avmad/TochatteR/app/src/main/res/drawable/ic_phone.xml" value="0.261025641025641" />
         <entry key="..\:/avmad/TochatteR/app/src/main/res/drawable/ic_send.xml" value="0.26510416666666664" />
         <entry key="..\:/avmad/TochatteR/app/src/main/res/drawable/ic_settings.xml" value="0.26510416666666664" />
@@ -28,7 +30,7 @@
         <entry key="..\:/avmad/TochatteR/app/src/main/res/layout/app_bar_layout.xml" value="0.264" />
         <entry key="..\:/avmad/TochatteR/app/src/main/res/layout/fragment_arama.xml" value="0.264" />
         <entry key="..\:/avmad/TochatteR/app/src/main/res/layout/fragment_chats.xml" value="0.2" />
-        <entry key="..\:/avmad/TochatteR/app/src/main/res/layout/fragment_contacts.xml" value="0.12107396149949341" />
+        <entry key="..\:/avmad/TochatteR/app/src/main/res/layout/fragment_contacts.xml" value="0.264" />
         <entry key="..\:/avmad/TochatteR/app/src/main/res/layout/fragment_groups.xml" value="0.264" />
         <entry key="..\:/avmad/TochatteR/app/src/main/res/layout/fragment_gruplar.xml" value="0.264" />
         <entry key="..\:/avmad/TochatteR/app/src/main/res/layout/fragment_kisiler.xml" value="0.2028985507246377" />

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,12 +31,11 @@ public class GroupsFragment extends Fragment {
     private final ArrayList<String> arrayGroups = new ArrayList<>();
 
     private String activeUserId = FirebaseAuth.getInstance().getUid();
-
     private DatabaseReference groupPath;
+    EditText groupSearch;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
 
         View groupFragmentView = inflater.inflate(R.layout.fragment_groups, container, false);
         groupPath = FirebaseDatabase.getInstance().getReference().child("Groups_tb");
@@ -45,6 +45,14 @@ public class GroupsFragment extends Fragment {
         lstView.setAdapter(arrayAdapter);
 
         listGroups();
+
+
+
+
+
+
+
+
 
         lstView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -80,5 +88,9 @@ public class GroupsFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+
+
+
+
     }
 }
