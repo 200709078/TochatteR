@@ -15,7 +15,7 @@
             android:id="@+id/img_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/login_photo" />
+            android:src="@drawable/ic_tochatter_logo" />
 
         <EditText
             android:id="@+id/edt_user_email"

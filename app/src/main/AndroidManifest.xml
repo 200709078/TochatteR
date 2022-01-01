@@ -6,9 +6,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_round_tochatter"
+        android:icon="@drawable/ic_tochatter_logo"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/ic_square_tochatter"
+        android:roundIcon="@drawable/ic_tochatter_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.TochatteR">
         <activity

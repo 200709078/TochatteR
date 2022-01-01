@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
 
             HashMap<String, Object> groupValuesMap = new HashMap<>();
             groupValuesMap.put("gname_tb", groupName);
-            groupValuesMap.put("uid_tb", activeUserID);
+            groupValuesMap.put("cuid_tb", activeUserID);
 
             messagesKeyPath.updateChildren(groupValuesMap);
 

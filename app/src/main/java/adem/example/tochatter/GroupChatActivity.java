@@ -36,7 +36,7 @@ public class GroupChatActivity extends AppCompatActivity {
     private TextView txtGroupChat;
 
     private DatabaseReference userPath;
-    private DatabaseReference groupNamePath;
+    private DatabaseReference groupMessagesPath;
 
     private String activeUserID;
     private String activeUsername;
@@ -52,7 +52,7 @@ public class GroupChatActivity extends AppCompatActivity {
         FirebaseAuth myAuth = FirebaseAuth.getInstance();
         activeUserID = myAuth.getCurrentUser().getUid();
         userPath = FirebaseDatabase.getInstance().getReference().child("Users_tb");
-        groupNamePath = FirebaseDatabase.getInstance().getReference().child("Groups_tb").child(activeGroupName);
+        groupMessagesPath = FirebaseDatabase.getInstance().getReference().child("Groups_tb");
 
         Toolbar myToolbar = findViewById(R.id.group_chat_bar_layout);
         setSupportActionBar(myToolbar);
@@ -69,7 +69,7 @@ public class GroupChatActivity extends AppCompatActivity {
         btnSendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveMessagesDB();
+                savegMessagesDB();
                 edtGroupMessage.setText(null);
                 groupScrollView.fullScroll(ScrollView.FOCUS_DOWN);
             }
@@ -80,7 +80,7 @@ public class GroupChatActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        groupNamePath.addChildEventListener(new ChildEventListener() {
+        groupMessagesPath.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
                 if (dataSnapshot.exists()) {
@@ -127,10 +127,10 @@ public class GroupChatActivity extends AppCompatActivity {
         }
     }
 
-    private void saveMessagesDB() {
+    private void savegMessagesDB() {
 
         String message = edtGroupMessage.getText().toString();
-        String messageKey = groupNamePath.push().getKey();
+        String messageKey = groupMessagesPath.push().getKey();
 
         if (TextUtils.isEmpty(message)) {
             Toast.makeText(this, "Message field cannot be empty...!!!", Toast.LENGTH_LONG).show();
@@ -141,17 +141,17 @@ public class GroupChatActivity extends AppCompatActivity {
             String activeDateTime = activeDateTimeFormat.format(datetimeCalendar.getTime());
 
             HashMap<String, Object> groupMessageKey = new HashMap<>();
-            groupNamePath.updateChildren(groupMessageKey);
+            groupMessagesPath.updateChildren(groupMessageKey);
 
-            DatabaseReference groupMessageKeyPath = groupNamePath.child(messageKey);
+            DatabaseReference groupMessageKeyPath = groupMessagesPath.child(messageKey);
 
-            HashMap<String, Object> messageValuesMap = new HashMap<>();
-            messageValuesMap.put("s_uid", activeUserID);
-            messageValuesMap.put("uname_tb", activeUsername);
-            messageValuesMap.put("message_tb", message);
-            messageValuesMap.put("date_time_tb", activeDateTime);
+            HashMap<String, Object> gmessageValuesMap = new HashMap<>();
+            gmessageValuesMap.put("s_uid", activeUserID);
+            gmessageValuesMap.put("uname_tb", activeUsername);
+            gmessageValuesMap.put("message_tb", message);
+            gmessageValuesMap.put("date_time_tb", activeDateTime);
 
-            groupMessageKeyPath.updateChildren(messageValuesMap);
+            groupMessageKeyPath.updateChildren(gmessageValuesMap);
         }
     }
 

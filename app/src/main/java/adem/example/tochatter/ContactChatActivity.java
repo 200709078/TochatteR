@@ -40,7 +40,7 @@ public class ContactChatActivity extends AppCompatActivity {
     private TextView txtContactChat;
 
     private DatabaseReference userPath;
-    private DatabaseReference messagesPath;
+    private DatabaseReference contactMessagesPath;
 
     private String activeUserID;
     private String activeUsername;
@@ -57,7 +57,7 @@ public class ContactChatActivity extends AppCompatActivity {
         FirebaseAuth myAuth = FirebaseAuth.getInstance();
         activeUserID = myAuth.getCurrentUser().getUid();
         userPath = FirebaseDatabase.getInstance().getReference().child("Users_tb");
-        messagesPath = FirebaseDatabase.getInstance().getReference().child("Messages_tb");
+        contactMessagesPath = FirebaseDatabase.getInstance().getReference().child("uMessages_tb");
 
         Toolbar myToolbar = findViewById(R.id.contact_chat_bar_layout);
         setSupportActionBar(myToolbar);
@@ -74,7 +74,7 @@ public class ContactChatActivity extends AppCompatActivity {
         btnSendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveMessagesDB();
+                saveuMessagesDB();
                 edtContactMessage.setText(null);
                 contactScrollView.fullScroll(ScrollView.FOCUS_DOWN);
             }
@@ -85,17 +85,17 @@ public class ContactChatActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        messagesPath.addChildEventListener(new ChildEventListener() {
+        contactMessagesPath.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
                 if (dataSnapshot.exists()) {
-                    viewMessages(dataSnapshot);
+                    viewuMessages(dataSnapshot);
                 }
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
-                viewMessages(dataSnapshot);
+                viewuMessages(dataSnapshot);
             }
 
             @Override
@@ -115,7 +115,7 @@ public class ContactChatActivity extends AppCompatActivity {
         });
     }
 
-    private void viewMessages(DataSnapshot dataSnapshot) {
+    private void viewuMessages(DataSnapshot dataSnapshot) {
         Iterator iterator = dataSnapshot.getChildren().iterator();
 
         while (iterator.hasNext()) {
@@ -134,9 +134,9 @@ public class ContactChatActivity extends AppCompatActivity {
         }
     }
 
-    private void saveMessagesDB() {
+    private void saveuMessagesDB() {
         String message = edtContactMessage.getText().toString();
-        String messagesKey = messagesPath.push().getKey();
+        String messagesKey = contactMessagesPath.push().getKey();
 
         if (TextUtils.isEmpty(message)) {
             Toast.makeText(this, "Message field cannot be empty...!!!", Toast.LENGTH_LONG).show();
@@ -146,10 +146,10 @@ public class ContactChatActivity extends AppCompatActivity {
             SimpleDateFormat activeDateTimeFormat = new SimpleDateFormat("dd.MM.yy HH:mm:ss", Locale.ROOT);
             String activeDateTime = activeDateTimeFormat.format(datetimeCalendar.getTime());
 
-            HashMap<String, Object> groupMessageKey = new HashMap<>();
-            messagesPath.updateChildren(groupMessageKey);
+            HashMap<String, Object> contactMessageKey = new HashMap<>();
+            contactMessagesPath.updateChildren(contactMessageKey);
 
-            DatabaseReference messagesKeyPath = messagesPath.child(messagesKey);
+            DatabaseReference messagesKeyPath = contactMessagesPath.child(messagesKey);
 
             HashMap<String, Object> messageValuesMap = new HashMap<>();
             messageValuesMap.put("send_user_tb", activeUsername);

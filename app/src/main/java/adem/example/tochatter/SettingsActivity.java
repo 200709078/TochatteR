@@ -44,7 +44,7 @@ public class SettingsActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Settings");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Button btnProfileUpdate = findViewById(R.id.btn_profile_update);
+        Button btnProfileUpdate = findViewById(R.id.btn_set_update);
         edtUserName = findViewById(R.id.edt_set_username);
         edtUserStatus = findViewById(R.id.edt_set_status);
         email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
