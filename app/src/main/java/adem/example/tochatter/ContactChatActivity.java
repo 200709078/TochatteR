@@ -35,11 +35,9 @@ public class ContactChatActivity extends AppCompatActivity {
     private ScrollView contactScrollView;
     private TextView txtContactChat;
 
-    private DatabaseReference userPath;
-    private DatabaseReference contactMessagesPath;
+    private DatabaseReference userPath, contactMessagesPath;
 
-    private String activeUserID;
-    private String activeUsername, selectUserName;
+    private String activeUserID, activeUsername, selectUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

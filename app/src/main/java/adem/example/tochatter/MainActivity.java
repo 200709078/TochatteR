@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.AndroidRuntimeException;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -82,7 +83,10 @@ public class MainActivity extends AppCompatActivity {
 
                 if ((dataSnapshot.child("uname_tb").exists())) {
                     currentUserName = dataSnapshot.child("uname_tb").getValue().toString().toUpperCase(Locale.ROOT);
+                    //userisActive("ON");
                 } else {
+                    //userisActive("OF");
+
                     Intent settings = new Intent(MainActivity.this, SettingsActivity.class);
                     settings.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(settings);
@@ -166,27 +170,29 @@ public class MainActivity extends AppCompatActivity {
         groupValuesMap.put("cuid_tb", activeUserID);
 
         messagesKeyPath.updateChildren(groupValuesMap);
-
     }
 
-    private void userisActive(String isActive_tb){
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference("Users_tb").child(activeUserID);
-
-        HashMap<String, Object> isactiveMap = new HashMap<>();
-        isactiveMap.put("isActive_tb", isActive_tb);
-
-        db.updateChildren(isactiveMap);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        userisActive("OFF");
+    private void userisActive (String isActive_tb) {
+        try {
+            DatabaseReference db = FirebaseDatabase.getInstance().getReference("Users_tb").child(activeUserID);
+            HashMap<String, Object> isactiveMap = new HashMap<>();
+            isactiveMap.put("isActive_tb", isActive_tb);
+            db.updateChildren(isactiveMap);
+        }catch (RuntimeException e){
+            String emessage=e.getMessage();
+            Toast.makeText(this, "Error: "+emessage, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
         userisActive("ON");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        userisActive("OFF");
     }
 }

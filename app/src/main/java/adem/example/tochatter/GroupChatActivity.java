@@ -35,11 +35,9 @@ public class GroupChatActivity extends AppCompatActivity {
     private ScrollView groupScrollView;
     private TextView txtGroupChat;
 
-    private DatabaseReference userPath;
-    private DatabaseReference groupMessagesPath;
+    private DatabaseReference userPath, groupMessagesPath;
 
-    private String activeUserID;
-    private String activeUsername, activeGroupName;
+    private String activeUserID, activeUsername, activeGroupName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
