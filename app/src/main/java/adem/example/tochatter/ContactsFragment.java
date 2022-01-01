@@ -81,9 +81,9 @@ public class ContactsFragment extends Fragment {
                 contactSearch.setText(null);
 
                 String selectUserName = parent.getItemAtPosition(position).toString();
-                Intent userChatActivity = new Intent(getContext(), ContactChatActivity.class);
-                userChatActivity.putExtra("selectUserName", selectUserName);
-                startActivity(userChatActivity);
+                Intent contactChatActivity = new Intent(getContext(), ContactChatActivity.class);
+                contactChatActivity.putExtra("selectUserName", selectUserName);
+                startActivity(contactChatActivity);
 
             }
         });

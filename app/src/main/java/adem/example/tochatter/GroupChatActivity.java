@@ -39,20 +39,20 @@ public class GroupChatActivity extends AppCompatActivity {
     private DatabaseReference groupMessagesPath;
 
     private String activeUserID;
-    private String activeUsername;
+    private String activeUsername, activeGroupName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_chat);
 
-        String activeGroupName = getIntent().getExtras().get("groupName").toString();
+        activeGroupName = getIntent().getExtras().get("groupName").toString();
         //Toast.makeText(this, activeGroupName, Toast.LENGTH_LONG).show();
 
         FirebaseAuth myAuth = FirebaseAuth.getInstance();
         activeUserID = myAuth.getCurrentUser().getUid();
         userPath = FirebaseDatabase.getInstance().getReference().child("Users_tb");
-        groupMessagesPath = FirebaseDatabase.getInstance().getReference().child("Groups_tb");
+        groupMessagesPath = FirebaseDatabase.getInstance().getReference().child("gMessages_tb");
 
         Toolbar myToolbar = findViewById(R.id.group_chat_bar_layout);
         setSupportActionBar(myToolbar);
@@ -84,13 +84,13 @@ public class GroupChatActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
                 if (dataSnapshot.exists()) {
-                    viewMessages(dataSnapshot);
+                    viewgMessages(dataSnapshot);
                 }
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
-                viewMessages(dataSnapshot);
+                viewgMessages(dataSnapshot);
             }
 
             @Override
@@ -110,7 +110,7 @@ public class GroupChatActivity extends AppCompatActivity {
         });
     }
 
-    private void viewMessages(DataSnapshot dataSnapshot) {
+    private void viewgMessages(DataSnapshot dataSnapshot) {
 
         Iterator iterator = dataSnapshot.getChildren().iterator();
 
@@ -118,10 +118,13 @@ public class GroupChatActivity extends AppCompatActivity {
 
             String chatDateTime = (String) ((DataSnapshot) iterator.next()).getValue();
             String chatMessage = (String) ((DataSnapshot) iterator.next()).getValue();
-            String userName = (String) ((DataSnapshot) iterator.next()).getValue();
-            String s_UID = (String) ((DataSnapshot) iterator.next()).getValue();
+            String groupName = (String) ((DataSnapshot) iterator.next()).getValue();
+            String sendUser = (String) ((DataSnapshot) iterator.next()).getValue();
 
-            txtGroupChat.append(userName + " :\n" + chatMessage + "\n" + chatDateTime + "\n\n");
+
+            if (activeGroupName.equals(groupName)) {
+                txtGroupChat.append(sendUser + "\n" + chatMessage + "\n" + chatDateTime + "\n\n");
+            }
 
             groupScrollView.fullScroll(ScrollView.FOCUS_DOWN);
         }
@@ -129,10 +132,10 @@ public class GroupChatActivity extends AppCompatActivity {
 
     private void savegMessagesDB() {
 
-        String message = edtGroupMessage.getText().toString();
-        String messageKey = groupMessagesPath.push().getKey();
+        String messageGroup = edtGroupMessage.getText().toString();
+        String messageGroupKey = groupMessagesPath.push().getKey();
 
-        if (TextUtils.isEmpty(message)) {
+        if (TextUtils.isEmpty(messageGroup)) {
             Toast.makeText(this, "Message field cannot be empty...!!!", Toast.LENGTH_LONG).show();
         } else {
 
@@ -143,15 +146,15 @@ public class GroupChatActivity extends AppCompatActivity {
             HashMap<String, Object> groupMessageKey = new HashMap<>();
             groupMessagesPath.updateChildren(groupMessageKey);
 
-            DatabaseReference groupMessageKeyPath = groupMessagesPath.child(messageKey);
+            DatabaseReference messagesKeyPath = groupMessagesPath.child(messageGroupKey);
 
-            HashMap<String, Object> gmessageValuesMap = new HashMap<>();
-            gmessageValuesMap.put("s_uid", activeUserID);
-            gmessageValuesMap.put("uname_tb", activeUsername);
-            gmessageValuesMap.put("message_tb", message);
-            gmessageValuesMap.put("date_time_tb", activeDateTime);
+            HashMap<String, Object> gmessagesValuesMap = new HashMap<>();
+            gmessagesValuesMap.put("send_uname_tb", activeUsername);
+            gmessagesValuesMap.put("select_gname_tb", activeGroupName);
+            gmessagesValuesMap.put("gmessage_tb", messageGroup);
+            gmessagesValuesMap.put("date_time_tb", activeDateTime);
 
-            groupMessageKeyPath.updateChildren(gmessageValuesMap);
+            messagesKeyPath.updateChildren(gmessagesValuesMap);
         }
     }
 
