@@ -34,8 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser activeUser;
     private FirebaseAuth myAuth;
     private DatabaseReference usersReference;
-    String activeUserID;
-    String currentUserName;
+    String activeUserID, currentUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,5 +167,26 @@ public class MainActivity extends AppCompatActivity {
 
         messagesKeyPath.updateChildren(groupValuesMap);
 
+    }
+
+    private void userisActive(String isActive_tb){
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference("Users_tb").child(activeUserID);
+
+        HashMap<String, Object> isactiveMap = new HashMap<>();
+        isactiveMap.put("isActive_tb", isActive_tb);
+
+        db.updateChildren(isactiveMap);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        userisActive("OFF");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        userisActive("ON");
     }
 }

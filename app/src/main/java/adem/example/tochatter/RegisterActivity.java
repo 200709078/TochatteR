@@ -89,6 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
                         profileMap.put("uname_tb", username);
                         profileMap.put("mail_tb", email);
                         profileMap.put("status_tb", "");
+                        profileMap.put("isActive_tb", "ON");
 
                         rootReference.child("Users_tb").child(activeUserID).setValue(profileMap);
 

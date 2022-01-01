@@ -34,8 +34,7 @@ public class ContactsFragment extends Fragment {
     private final ArrayList<String> arrayContacts = new ArrayList<>();
 
     private DatabaseReference userPath;
-    private String activeUserID = FirebaseAuth.getInstance().getUid();
-    private String activeUsername;
+    private String activeUserID = FirebaseAuth.getInstance().getUid(), activeUsername;
     private EditText contactSearch;
 
     @Override
@@ -126,7 +125,7 @@ public class ContactsFragment extends Fragment {
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     if (!snapshot.child("uname_tb").getValue().toString().equals(activeUsername)) {
-                        set.add(snapshot.child("uname_tb").getValue().toString());
+                        set.add(snapshot.child("uname_tb").getValue().toString() +" - "+ snapshot.child("isActive_tb").getValue().toString());
                     }
                 }
 
@@ -156,4 +155,5 @@ public class ContactsFragment extends Fragment {
             }
         });
     }
+
 }

@@ -173,4 +173,5 @@ public class GroupChatActivity extends AppCompatActivity {
             }
         });
     }
+
 }

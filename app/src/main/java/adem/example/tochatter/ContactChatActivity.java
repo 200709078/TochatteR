@@ -39,8 +39,7 @@ public class ContactChatActivity extends AppCompatActivity {
     private DatabaseReference contactMessagesPath;
 
     private String activeUserID;
-    private String activeUsername;
-    String selectUserName;
+    private String activeUsername, selectUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

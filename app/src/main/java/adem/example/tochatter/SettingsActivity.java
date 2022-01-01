@@ -100,27 +100,19 @@ public class SettingsActivity extends AppCompatActivity {
             Toast.makeText(this, "Please write your status...!!!", Toast.LENGTH_LONG).show();
         } else {
 
-            HashMap<String, String> profileMap = new HashMap<>();
-            profileMap.put("mail_tb", email);
+            HashMap<String, Object> profileMap = new HashMap<>();
             profileMap.put("uname_tb", setUserName);
             profileMap.put("status_tb", setUserStatus);
-            profileMap.put("uid_tb", activeUserID);
 
-            dataPath.child("Users_tb").child(activeUserID).setValue(profileMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(SettingsActivity.this, "Your profile has been successfully updated...!!!", Toast.LENGTH_LONG).show();
-                        Intent mainIntent = new Intent(SettingsActivity.this, MainActivity.class);
-                        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(mainIntent);
-                        finish();
-                    } else {
-                        String eMessage = task.getException().toString();
-                        Toast.makeText(SettingsActivity.this, "Your profile could not be update. \nError: " + eMessage, Toast.LENGTH_LONG).show();
-                    }
-                }
-            });
+            dataPath.child("Users_tb").child(activeUserID).updateChildren(profileMap);
+
+            Toast.makeText(SettingsActivity.this, "Your profile has been successfully updated...!!!", Toast.LENGTH_LONG).show();
+            Intent mainIntent = new Intent(SettingsActivity.this, MainActivity.class);
+            mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(mainIntent);
+            finish();
+
         }
     }
+
 }
