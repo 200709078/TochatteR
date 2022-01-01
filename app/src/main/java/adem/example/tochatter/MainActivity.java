@@ -17,8 +17,6 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,8 +26,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -158,39 +154,19 @@ public class MainActivity extends AppCompatActivity {
 
     private void createNewGroup(String groupName) {
 
-        //String message = edtContactMessage.getText().toString();
-        //String messagesKey = messagesPath.push().getKey();
         DatabaseReference groupPath = FirebaseDatabase.getInstance().getReference().child("Groups_tb");
         String groupKey = groupPath.push().getKey();
 
-            HashMap<String, Object> groupMessageKey = new HashMap<>();
-            groupPath.updateChildren(groupMessageKey);
+        HashMap<String, Object> groupMessageKey = new HashMap<>();
+        groupPath.updateChildren(groupMessageKey);
 
-            DatabaseReference messagesKeyPath = groupPath.child(groupKey);
+        DatabaseReference messagesKeyPath = groupPath.child(groupKey);
 
-            HashMap<String, Object> groupValuesMap = new HashMap<>();
-            groupValuesMap.put("gname_tb", groupName);
-            groupValuesMap.put("cuid_tb", activeUserID);
+        HashMap<String, Object> groupValuesMap = new HashMap<>();
+        groupValuesMap.put("gname_tb", groupName);
+        groupValuesMap.put("cuid_tb", activeUserID);
 
-            messagesKeyPath.updateChildren(groupValuesMap);
-
-
-
-
-/*        usersReference.child("Groups_tb").child((groupName+" ("+currentUserName+")").toUpperCase(Locale.ROOT)).setValue("").addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(MainActivity.this, "The group named " + groupName + " has been created.", Toast.LENGTH_LONG).show();
-
-                } else {
-                    String eMessage = task.getException().toString();
-                    Toast.makeText(MainActivity.this, "Error: " + eMessage, Toast.LENGTH_LONG).show();
-                }
-            }
-        });*/
-
-
+        messagesKeyPath.updateChildren(groupValuesMap);
 
     }
 }

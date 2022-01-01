@@ -16,8 +16,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.ScrollView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -29,7 +27,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 public class ContactsFragment extends Fragment {
@@ -48,14 +45,14 @@ public class ContactsFragment extends Fragment {
         userPath = FirebaseDatabase.getInstance().getReference().child("Users_tb");
 
         ListView lstView = userFragmentView.findViewById(R.id.contacts_list_view);
-        arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_expandable_list_item_1, arrayContacts);
+        arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_expandable_list_item_1, arrayContacts);
         lstView.setAdapter(arrayAdapter);
 
         takeUserInfo();
 
         listContacts();
 
-        contactSearch=userFragmentView.findViewById(R.id.edt_contact_search);
+        contactSearch = userFragmentView.findViewById(R.id.edt_contact_search);
 
         contactSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -93,7 +90,7 @@ public class ContactsFragment extends Fragment {
 
     private void searchContacts(String s) {
         Query query = FirebaseDatabase.getInstance().getReference("Users_tb").orderByChild("uname_tb")
-                .startAt(s).endAt(s+"\uf8ff");
+                .startAt(s).endAt(s + "\uf8ff");
 
         query.addValueEventListener(new ValueEventListener() {
             @Override

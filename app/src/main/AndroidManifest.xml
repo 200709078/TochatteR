@@ -13,16 +13,16 @@
         android:theme="@style/Theme.TochatteR">
         <activity
             android:name=".ContactChatActivity"
-            android:parentActivityName=".MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".GroupChatActivity"
-            android:parentActivityName=".ContactChatActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ContactChatActivity" />
         <activity
             android:name=".SettingsActivity"
-            android:parentActivityName=".MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />
