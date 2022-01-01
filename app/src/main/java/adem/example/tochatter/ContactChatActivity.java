@@ -167,7 +167,7 @@ public class ContactChatActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    activeUsername = dataSnapshot.child("name_tb").getValue().toString();
+                    activeUsername = dataSnapshot.child("uname_tb").getValue().toString();
                 }
             }
 

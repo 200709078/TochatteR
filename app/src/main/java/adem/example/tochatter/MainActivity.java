@@ -28,6 +28,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser activeUser;
     private FirebaseAuth myAuth;
     private DatabaseReference usersReference;
+    String activeUserID;
+    String currentUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         myAuth = FirebaseAuth.getInstance();
         activeUser = myAuth.getCurrentUser();
         usersReference = FirebaseDatabase.getInstance().getReference();
+
     }
 
     @Override
@@ -73,14 +79,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void haveUsers() {
-        String activeUserID = myAuth.getCurrentUser().getUid();
+        activeUserID = myAuth.getCurrentUser().getUid();
 
         usersReference.child("Users_tb").child(activeUserID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                if ((dataSnapshot.child("name_tb").exists())) {
-                    String currentUserName = dataSnapshot.child("name_tb").getValue().toString().toUpperCase(Locale.ROOT);
+                if ((dataSnapshot.child("uname_tb").exists())) {
+                    currentUserName = dataSnapshot.child("uname_tb").getValue().toString().toUpperCase(Locale.ROOT);
                 } else {
                     Intent settings = new Intent(MainActivity.this, SettingsActivity.class);
                     settings.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -106,8 +112,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
-        if (item.getItemId() == R.id.opt_find_friends) {
-            Toast.makeText(MainActivity.this, "Find Friend option selected.", Toast.LENGTH_LONG).show();
+        if (item.getItemId() == R.id.opt_create_groups) {
+            createNewGroups();
         }
         if (item.getItemId() == R.id.opt_settings) {
             Intent settings = new Intent(MainActivity.this, SettingsActivity.class);
@@ -117,9 +123,6 @@ public class MainActivity extends AppCompatActivity {
             myAuth.signOut();
             Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(loginIntent);
-        }
-        if (item.getItemId() == R.id.opt_create_groups) {
-            createNewGroups();
         }
         return true;
     }
@@ -154,16 +157,40 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void createNewGroup(String groupName) {
-        usersReference.child("Groups_tb").child(groupName).setValue(" ").addOnCompleteListener(new OnCompleteListener<Void>() {
+
+        //String message = edtContactMessage.getText().toString();
+        //String messagesKey = messagesPath.push().getKey();
+        DatabaseReference groupPath = FirebaseDatabase.getInstance().getReference().child("Groups_tb");
+        String groupKey = groupPath.push().getKey();
+
+            HashMap<String, Object> groupMessageKey = new HashMap<>();
+            groupPath.updateChildren(groupMessageKey);
+
+            DatabaseReference messagesKeyPath = groupPath.child(groupKey);
+
+            HashMap<String, Object> groupValuesMap = new HashMap<>();
+            groupValuesMap.put("gname_tb", groupName);
+            groupValuesMap.put("uid_tb", activeUserID);
+
+            messagesKeyPath.updateChildren(groupValuesMap);
+
+
+
+
+/*        usersReference.child("Groups_tb").child((groupName+" ("+currentUserName+")").toUpperCase(Locale.ROOT)).setValue("").addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(MainActivity.this, "The group named " + groupName + " has been created.", Toast.LENGTH_LONG).show();
+
                 } else {
                     String eMessage = task.getException().toString();
                     Toast.makeText(MainActivity.this, "Error: " + eMessage, Toast.LENGTH_LONG).show();
                 }
             }
-        });
+        });*/
+
+
+
     }
 }

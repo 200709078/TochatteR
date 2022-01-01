@@ -65,15 +65,15 @@ public class SettingsActivity extends AppCompatActivity {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if ((dataSnapshot.exists()) && (dataSnapshot.hasChild("name_tb") && (dataSnapshot.hasChild("picture_tb")))) {
-                            String takeUserName = dataSnapshot.child("name_tb").getValue().toString();
+                        if ((dataSnapshot.exists()) && (dataSnapshot.hasChild("uname_tb") && (dataSnapshot.hasChild("picture_tb")))) {
+                            String takeUserName = dataSnapshot.child("uname_tb").getValue().toString();
                             String takeUserStatus = dataSnapshot.child("status_tb").getValue().toString();
 
                             edtUserName.setText(takeUserName);
                             edtUserStatus.setText(takeUserStatus);
 
-                        } else if ((dataSnapshot.exists()) && (dataSnapshot.hasChild("name_tb"))) {
-                            String takeUserName = dataSnapshot.child("name_tb").getValue().toString();
+                        } else if ((dataSnapshot.exists()) && (dataSnapshot.hasChild("uname_tb"))) {
+                            String takeUserName = dataSnapshot.child("uname_tb").getValue().toString();
                             String takeUserStatus = dataSnapshot.child("status_tb").getValue().toString();
 
                             edtUserName.setText(takeUserName);
@@ -102,7 +102,7 @@ public class SettingsActivity extends AppCompatActivity {
 
             HashMap<String, String> profileMap = new HashMap<>();
             profileMap.put("mail_tb", email);
-            profileMap.put("name_tb", setUserName);
+            profileMap.put("uname_tb", setUserName);
             profileMap.put("status_tb", setUserStatus);
             profileMap.put("uid_tb", activeUserID);
 

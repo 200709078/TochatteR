@@ -86,7 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                         HashMap<String, String> profileMap = new HashMap<>();
                         profileMap.put("uid_tb", activeUserID);
-                        profileMap.put("name_tb", username);
+                        profileMap.put("uname_tb", username);
                         profileMap.put("mail_tb", email);
                         profileMap.put("status_tb", "");
 

@@ -19,10 +19,11 @@
             android:src="@drawable/ic_search"/>
 
         <EditText
+            android:id="@+id/edt_contact_search"
             android:layout_marginLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/enter_group_name_search"
+            android:hint="@string/enter_user_name_for_search"
             android:inputType="text" />
 
     </LinearLayout>

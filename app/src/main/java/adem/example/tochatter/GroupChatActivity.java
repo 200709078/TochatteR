@@ -147,7 +147,7 @@ public class GroupChatActivity extends AppCompatActivity {
 
             HashMap<String, Object> messageValuesMap = new HashMap<>();
             messageValuesMap.put("s_uid", activeUserID);
-            messageValuesMap.put("name_tb", activeUsername);
+            messageValuesMap.put("uname_tb", activeUsername);
             messageValuesMap.put("message_tb", message);
             messageValuesMap.put("date_time_tb", activeDateTime);
 
@@ -160,7 +160,7 @@ public class GroupChatActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    activeUsername = dataSnapshot.child("name_tb").getValue().toString();
+                    activeUsername = dataSnapshot.child("uname_tb").getValue().toString();
                 }
             }
 
