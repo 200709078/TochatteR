@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        userisActive("ON");
 
         if (activeUser == null) {
             Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
@@ -72,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(loginIntent);
         } else {
             haveUsers();
+            userisActive("ON");
         }
     }
 
@@ -197,5 +197,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         userisActive("OFF");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        userisActive("ON");
     }
 }

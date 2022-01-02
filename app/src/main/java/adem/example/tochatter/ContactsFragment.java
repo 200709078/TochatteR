@@ -98,7 +98,8 @@ public class ContactsFragment extends Fragment {
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     if (!snapshot.child("uname_tb").getValue().toString().equals(activeUsername)) {
-                        set.add(snapshot.child("uname_tb").getValue().toString() +" - "+ snapshot.child("isActive_tb").getValue().toString());
+                        set.add(snapshot.child("uname_tb").getValue().toString());
+                        //set.add(snapshot.child("uname_tb").getValue().toString() +" - "+ snapshot.child("isActive_tb").getValue().toString());
                     }
                 }
 
@@ -125,7 +126,8 @@ public class ContactsFragment extends Fragment {
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     if (!snapshot.child("uname_tb").getValue().toString().equals(activeUsername)) {
-                        set.add(snapshot.child("uname_tb").getValue().toString() +" - "+ snapshot.child("isActive_tb").getValue().toString());
+                        set.add(snapshot.child("uname_tb").getValue().toString());
+                        //set.add(snapshot.child("uname_tb").getValue().toString() +" - "+ snapshot.child("isActive_tb").getValue().toString());
                     }
                 }
 
