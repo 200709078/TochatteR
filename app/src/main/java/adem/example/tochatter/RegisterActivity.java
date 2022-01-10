@@ -93,6 +93,9 @@ public class RegisterActivity extends AppCompatActivity {
 
                         rootReference.child("Users_tb").child(activeUserID).setValue(profileMap);
 
+                        //Users users=new Users("ON",email, "mesgul", activeUserID, username);
+                        //Toast.makeText(RegisterActivity.this, "users", Toast.LENGTH_SHORT).show();
+
                         Intent mainIntent = new Intent(RegisterActivity.this, MainActivity.class);
                         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(mainIntent);

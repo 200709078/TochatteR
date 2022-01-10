@@ -2,6 +2,8 @@
 package adem.example.tochatter;
 
 import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
