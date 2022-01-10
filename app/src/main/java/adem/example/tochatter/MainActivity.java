@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(loginIntent);
         } else {
             haveUsers();
+            userisActive("ON");
         }
     }
 
@@ -83,9 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if ((dataSnapshot.child("uname_tb").exists())) {
                     currentUserName = dataSnapshot.child("uname_tb").getValue().toString().toUpperCase(Locale.ROOT);
-                    //userisActive("ON");
                 } else {
-                    //userisActive("OF");
 
                     Intent settings = new Intent(MainActivity.this, SettingsActivity.class);
                     settings.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -130,13 +129,14 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog);
         builder.setTitle("Enter group name...!!!");
 
-        final EditText txtGroupName = new EditText(MainActivity.this);
-        txtGroupName.setHint("Example: My Family");
-        builder.setView(txtGroupName);
+        final EditText edtGroupName = new EditText(MainActivity.this);
+        edtGroupName.setHint("Example: My Family");
+        edtGroupName.setWidth(100);
+        builder.setView(edtGroupName);
         builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String groupName = txtGroupName.getText().toString();
+                String groupName = edtGroupName.getText().toString();
                 if (TextUtils.isEmpty(groupName)) {
                     Toast.makeText(MainActivity.this, "Group name cannot be empty", Toast.LENGTH_LONG).show();
                 } else {
@@ -170,9 +170,11 @@ public class MainActivity extends AppCompatActivity {
         groupValuesMap.put("cuid_tb", activeUserID);
 
         messagesKeyPath.updateChildren(groupValuesMap);
+        Toast.makeText(MainActivity.this, "Group "+groupName+" created.", Toast.LENGTH_LONG).show();
+
     }
 
-    private void userisActive (String isActive_tb) {
+    public void userisActive (String isActive_tb) {
         try {
             DatabaseReference db = FirebaseDatabase.getInstance().getReference("Users_tb").child(activeUserID);
             HashMap<String, Object> isactiveMap = new HashMap<>();
@@ -184,15 +186,22 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        userisActive("ON");
-    }
 
     @Override
     protected void onStop() {
         super.onStop();
         userisActive("OFF");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        userisActive("OFF");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        userisActive("ON");
     }
 }
