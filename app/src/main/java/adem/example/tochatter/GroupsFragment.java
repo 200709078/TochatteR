@@ -1,4 +1,4 @@
-// Adem VAROL - 200709078
+// Cihan Sezer ÖZKAMER
 package adem.example.tochatter;
 
 import android.content.Intent;

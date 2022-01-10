@@ -1,4 +1,4 @@
-// Adem VAROL - 200709078
+// Cihan Sezer ÖZKAMER
 package adem.example.tochatter;
 
 import androidx.annotation.NonNull;
@@ -119,13 +119,12 @@ public class GroupChatActivity extends AppCompatActivity {
             String groupName = (String) ((DataSnapshot) iterator.next()).getValue();
             String sendUser = (String) ((DataSnapshot) iterator.next()).getValue();
 
-
             if (activeGroupName.equals(groupName)) {
                 txtGroupChat.append(sendUser + "\n" + chatMessage + "\n" + chatDateTime + "\n\n");
             }
-
             groupScrollView.fullScroll(ScrollView.FOCUS_DOWN);
         }
+
     }
 
     private void savegMessagesDB() {
