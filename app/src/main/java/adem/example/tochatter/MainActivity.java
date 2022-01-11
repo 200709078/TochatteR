@@ -13,8 +13,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.AndroidRuntimeException;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -58,7 +60,40 @@ public class MainActivity extends AppCompatActivity {
         activeUser = myAuth.getCurrentUser();
         usersReference = FirebaseDatabase.getInstance().getReference();
 
+        //// CALLING START THREAD METHOD
+        startThread();
     }
+
+    private static final String TAG = "MainActivity";
+
+    public void startThread() {
+        AdemRunnable threadRunnable = new AdemRunnable(10000);
+        new Thread(threadRunnable).start();
+    }
+
+
+    static class AdemRunnable implements Runnable {
+        int counter;
+
+        AdemRunnable(int counter) {
+            this.counter = counter;
+        }
+
+        @Override
+        public void run() {
+            for (int i = 0; i <= counter; i++) {
+                synchronized (this) {
+                    Log.d(TAG, "Adem : " + i);
+                }
+// If you activate below line instead of the above lines, other operations
+// (connecting to the database, checking the active user, etc.)
+// will not be able to count up to the desired value because it will interfere.
+
+//                Log.d(TAG, "Adem :" + i);
+            }
+        }
+    }
+
 
     @Override
     protected void onStart() {
@@ -170,19 +205,19 @@ public class MainActivity extends AppCompatActivity {
         groupValuesMap.put("cuid_tb", activeUserID);
 
         messagesKeyPath.updateChildren(groupValuesMap);
-        Toast.makeText(MainActivity.this, "Group "+groupName+" created.", Toast.LENGTH_LONG).show();
+        Toast.makeText(MainActivity.this, "Group " + groupName + " created.", Toast.LENGTH_LONG).show();
 
     }
 
-    public void userisActive (String isActive_tb) {
+    public void userisActive(String isActive_tb) {
         try {
             DatabaseReference db = FirebaseDatabase.getInstance().getReference("Users_tb").child(activeUserID);
             HashMap<String, Object> isactiveMap = new HashMap<>();
             isactiveMap.put("isActive_tb", isActive_tb);
             db.updateChildren(isactiveMap);
-        }catch (RuntimeException e){
-            String emessage=e.getMessage();
-            Toast.makeText(this, "Error: "+emessage, Toast.LENGTH_SHORT).show();
+        } catch (RuntimeException e) {
+            String emessage = e.getMessage();
+            Toast.makeText(this, "Error: " + emessage, Toast.LENGTH_SHORT).show();
         }
     }
 

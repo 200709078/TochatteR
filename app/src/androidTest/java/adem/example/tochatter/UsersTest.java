@@ -12,7 +12,6 @@ public class UsersTest {
     public void getIsActive_tb() {
         users.setUname_tb("Adem");
         assertEquals(users.getUname_tb(),"Adem");
-
     }
 
     @Test
